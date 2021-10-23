@@ -2,7 +2,7 @@
 
 sfdisk /dev/sda < partition_table;
 
-mkfs.xfs /dev/sda1;
+mkfs.xfs -f /dev/sda1;
 
 mount /dev/sda1 /mnt;
 
