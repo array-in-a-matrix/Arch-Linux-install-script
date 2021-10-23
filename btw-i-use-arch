@@ -1,11 +1,21 @@
 #!/bin/sh
 
-sfdisk /dev/sda < partition_table
+sfdisk /dev/sda < partition_table;
 
-mkfs.xfs /dev/sda1 
+mkfs.xfs /dev/sda1;
 
-mount /dev/sda1 /mnt
+mount /dev/sda1 /mnt;
 
-pacstrap /mnt base linux && genfstab /mnt > /mnt/etc/fstab; arch-chroot /mnt bash -c 'pacman -Sy grub; grub-install /dev/sda; grub-mkconfig -o /boot/grub/grub.cfg'
+pacstrap /mnt base linux && genfstab /mnt > /mnt/etc/fstab;
 
-reboot
+arch-chroot /mnt;
+
+pacman -Sy --noconfirm grub;
+
+grub-install /dev/sda;
+
+grub-mkconfig -o /boot/grub/grub.cfg;
+
+exit;
+
+reboot;
