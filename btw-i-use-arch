@@ -6,18 +6,6 @@ mkfs.xfs /dev/sda1
 
 mount /dev/sda1 /mnt
 
-pacstrap /mnt base linux
+pacstrap /mnt base linux && genfstab /mnt > /mnt/etc/fstab; arch-chroot /mnt bash -c 'pacman -Sy grub; grub-install /dev/sda; grub-mkconfig -o /boot/grub/grub.cfg'
 
-genfstab /mnt > /mnt/etc/fstab
-
-arch-chroot /mnt
-
-pacman -Sy grub
-
-grub-install /dev/sda
-
-grub-mkconfig -o /boot/grub/grub.cfg
-
-exit
-
-# reboot
+reboot
