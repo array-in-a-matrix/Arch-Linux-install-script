@@ -19,7 +19,7 @@ echo "127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	$HOSTNAME" > /etc/hosts;
 
-echo -en $ROOT_PWD | passwd;
+echo -en "$ROOT_PWD\n$ROOT_PWD" | passwd;
 
 pacman -Sy --noconfirm grub networkmanager;
 
