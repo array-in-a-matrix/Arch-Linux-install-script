@@ -21,7 +21,7 @@ echo "127.0.0.1	localhost
 
 echo -en $ROOT_PWD | passwd;
 
-pacman -Sy --noconfirm grub NetworkManager;
+pacman -Sy --noconfirm grub networkmanager;
 
 grub-install /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg;
 
