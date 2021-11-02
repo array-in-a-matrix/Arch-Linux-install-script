@@ -1,5 +1,8 @@
 #!/bin/sh
 
+HOSTNAME="archlinux"
+ROOT_PWD="linux"
+
 sfdisk /dev/sda < partition_table;
 
 mkfs.xfs -f /dev/sda1;
@@ -10,9 +13,19 @@ pacstrap /mnt base linux && genfstab /mnt > /mnt/etc/fstab;
 
 arch-chroot /mnt;
 
-pacman -Sy --noconfirm grub;
+echo $HOSTNAME > /etc/hostname;
+
+echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	$HOSTNAME" > /etc/hosts;
+
+echo -en $ROOT_PWD | passwd;
+
+pacman -Sy --noconfirm grub NetworkManager;
 
 grub-install /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg;
+
+systemctl enable --now NetworkManager.service;
 
 exit;
 
