@@ -12,9 +12,7 @@ arch-chroot /mnt;
 
 pacman -Sy --noconfirm grub;
 
-grub-install /dev/sda;
-
-grub-mkconfig -o /boot/grub/grub.cfg;
+grub-install /dev/sda && grub-mkconfig -o /boot/grub/grub.cfg;
 
 exit;
 
